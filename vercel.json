@@ -6,12 +6,15 @@
       "use": "@vercel/node"
     },
     {
-      "src": "api/dist/index.html",
-      "use": "@vercel/static"
+      "src": "api/dist/(.*)",
+      "use": "@vercel/static",
+      "headers": {
+        "Content-Type": "application/javascript"
+      }
     }
   ],
   "routes": [
     { "src": "/users(.*)", "dest": "/api/index.js" },
-    { "src": "/(.*)", "dest": "api/dist/index.html" }
+    { "src": "/(.*)", "dest": "/api/dist/index.html" }
   ]
 }
