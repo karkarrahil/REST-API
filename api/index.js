@@ -11,31 +11,26 @@ const path = require('path');
 server.use(cors());
 server.use(express.json());
 server.use('/users', routs.router);
-server.use(express.static(path.resolve(__dirname, 'dist')));
+server.use(express.static(path.resolve(__dirname, '../dist')));
 
-server.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+server.get('*', async (req, res) => {
+  await res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
 });
 
 // mongoose connection and other code...
 main().catch(err => console.log(err));
 
 async function main() {
-    await mongoose.connect(process.env.MONGO_ATLAS_URI);
-    console.log('database connected!')
-    // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+  await mongoose.connect(process.env.MONGO_ATLAS_URI);
+  console.log('database connected!');
+  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
 
 
 
 
-
-
-
-
-
 server.listen(3000, () => {
-    console.log('server start');
+  console.log('server start');
 });
 
 
