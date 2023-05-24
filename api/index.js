@@ -37,6 +37,12 @@ server.use(cors())
 
 server.use(express.json());
 server.use('/users', routs.router)
+server.use((req, res, next) => {
+    if (req.url.endsWith('.js')) {
+        res.type('module');
+    }
+    next();
+});
 server.use(express.static(path.resolve(__dirname, process.env.PUBLIC_URL)))
 server.use('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
