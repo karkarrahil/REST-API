@@ -1,24 +1,27 @@
 const express = require('express');
-const morgan = require('morgan');
 const server = express();
-const routs = require('../routes/routs');
+const routs = require('./routes/routs');
 require('dotenv').config();
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
+
 const cors = require('cors');
 const path = require('path');
 
 server.use(cors());
 server.use(express.json());
-server.use('/users', routs.router);
-server.use(express.static(path.resolve(__dirname, '../' + process.env.PUBLIC_URL)));
+server.use('/api/v1/users', routs.router);
+// server.use(express.static(path.resolve(__dirname, '../' + process.env.PUBLIC_URL)));
 
-server.get('*', async (req, res) => {
-  await res.sendFile(path.resolve(__dirname, '../' + process.env.PUBLIC_URL, 'index.html'));
-});
+// server.get('*', async (req, res) => {
+//   await res.sendFile(path.resolve(__dirname, '../' + process.env.PUBLIC_URL, 'index.html'));
+// });
 
 // mongoose connection and other code...
-main().catch(err => console.log(err));
+
+
+mongoose.connection.on('error',err=>{
+  console.log('connection failed');
+});
 
 async function main() {
   await mongoose.connect(process.env.MONGO_ATLAS_URI);
