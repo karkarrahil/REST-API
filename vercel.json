@@ -5,7 +5,9 @@
     }
   },
   "routes": [
-    { "src": "/api/(.*)", "dest": "api/index.js" },
-    { "src": "/(.*)", "dest": "./dist/index.html" }
+    { "src": "/(.*)", "dest": "./api/index.js" },
+    { "src": "/(.*)", "dest": "./dist/index.html" },
+    { "src": "/(.*)", "dest": "./dist/assets/index-1151892b.js" },
+    { "src": "/(.*)", "dest": "./dist/assets/index-95ae0cd5.css" }
   ]
 }
