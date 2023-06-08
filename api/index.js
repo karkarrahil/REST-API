@@ -11,10 +11,10 @@ const path = require('path');
 server.use(cors());
 server.use(express.json());
 server.use('/users', routs.router);
-server.use(express.static(path.resolve(__dirname, '../dist')));
+server.use(express.static(path.resolve(__dirname, '../'+ process.env.PUBLIC_URL)));
 
 server.get('*', async (req, res) => {
-  await res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
+  await res.sendFile(path.resolve(__dirname, '../'+ process.env.PUBLIC_URL, 'index.html'));
 });
 
 // mongoose connection and other code...
