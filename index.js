@@ -19,9 +19,10 @@ server.use('/api/v1/users', routs.router);
 // mongoose connection and other code...
 
 
-mongoose.connection.on('error',err=>{
-  console.log('connection failed');
-});
+main().then(() => {
+  console.log("database connected! ")
+}).catch(err => console.log(err))
+
 
 async function main() {
   await mongoose.connect(process.env.MONGO_ATLAS_URI);
